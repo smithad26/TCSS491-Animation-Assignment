@@ -1,12 +1,19 @@
 class Player {
     constructor(game) {
         this.game = game;
-        // this will need to be changed
-        this.animator = new Animator(ASSET_MANAGER.getAsset("./Kirby.png"), 0, 0, 46, 108, 11, 0.2);
+        this.spritesheet = ASSET_MANAGER.getAsset("./Kirby.png")
+        this.animations = {
+            "idle": new Animator(this.spritesheet, 7, 10, 22, 20, 1, 0.2, false, false),
+            "walk-right": new Animator(this.spritesheet, 253, 10, 22, 20, 4, 0.2, false, true),
+            "walk-left": new Animator(this.spritesheet, 253, 10, 22, 20, 10, 0.2, false, true),
+            "duck": new Animator(this.spritesheet, 31, 10, 26, 20, 1, 0.2, false, false)
+        };
+
+        this.animator = this.animations["walk-right"]
 
         this.x = 0;
         this.y = 0;
-        this.speed = 25;
+        this.speed = 0;
     };
 
     update() {
